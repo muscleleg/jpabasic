@@ -47,15 +47,34 @@ public class JpaMain {
 //            }
 
             //-------------------------------------------------------
-            //비영속
-            Member member = new Member();
-            member.setId(100L);
-            member.setName("HelloJPA2");
-
-            //영속
-            System.out.println("before");
-            em.persist(member);
-            System.out.println("after");
+//            //비영속
+//            Member member = new Member();
+//            member.setId(101L);
+//            member.setName("HelloJPA2");
+//
+//            //영속
+//            System.out.println("before");
+//            em.persist(member);
+//            System.out.println("after");
+//
+//            //조회용 sql이 안나가면 1차캐시에서 데이터를 찾는다는 것이 증명됨
+//            Member findMember = em.find(Member.class, 101L);
+//
+//            System.out.println("findMember.id = " + findMember.getId());
+//            System.out.println("findMember.name = " + findMember.getName());
+//-------------------------------동일성 보장--------------------------------------------------------
+            //findMember1에서 쿼리가 한번 나가고
+            //findMember2에서는 캐시때문에 커리가 나가면 안됨
+//            Member findMember1 = em.find(Member.class, 101L);
+//            Member findMember2 = em.find(Member.class, 101L);
+//            System.out.println("result : "+(findMember1==findMember2));
+//            tx.commit();
+            //----------------쓰기기지연---------------------------
+            Member member1 = new Member(150L, "A");
+            Member member2 = new Member(160L, "B");
+            em.persist(member1);
+            em.persist(member2);
+            System.out.println("======================");
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
