@@ -36,15 +36,27 @@ public class JpaMain {
 //            tx.commit();
 
             //전부 조회
-            List<Member> result = em.createQuery("select m from Member as m", Member.class).getResultList();
-            for (Member member : result) {
-                System.out.println("member.name = " + member.getName());
-            }
+//            List<Member> result = em.createQuery("select m from Member as m", Member.class).getResultList();
+//            for (Member member : result) {
+//                System.out.println("member.name = " + member.getName());
+//            }
             //일부만 조회
 //            List<String> result = em.createQuery("select m.name from Member as m", String.class).getResultList();
 //            for (String member : result) {
 //                System.out.println("member.name = " + member);
 //            }
+
+            //-------------------------------------------------------
+            //비영속
+            Member member = new Member();
+            member.setId(100L);
+            member.setName("HelloJPA2");
+
+            //영속
+            System.out.println("before");
+            em.persist(member);
+            System.out.println("after");
+            tx.commit();
         } catch (Exception e) {
             tx.rollback();
         } finally {
