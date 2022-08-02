@@ -70,11 +70,25 @@ public class JpaMain {
 //            System.out.println("result : "+(findMember1==findMember2));
 //            tx.commit();
             //----------------쓰기기지연---------------------------
-            Member member1 = new Member(150L, "A");
-            Member member2 = new Member(160L, "B");
-            em.persist(member1);
-            em.persist(member2);
-            System.out.println("======================");
+//            Member member1 = new Member(150L, "A");
+//            Member member2 = new Member(160L, "B");
+//            em.persist(member1);
+//            em.persist(member2);
+//            System.out.println("======================");
+//            tx.commit();
+            //--------------플러시----------
+//            Member member = new Member(200L, "member200");
+//            em.persist(member);
+//            em.flush();
+//            System.out.println("===================");
+//            tx.commit();
+            //--------------준영속----------준영속이 되어 셀렉트만되고 업데이트쿼리는 안나감
+            Member member = em.find(Member.class, 1L);
+            member.setName("test");
+//            em.detach(member); //하나만 없앰
+            em.clear();//모두 없앰
+            Member member2 = em.find(Member.class, 1L);//영속성 캔택스트에서 제거했기때문에 여기서도 select문이 나감
+            System.out.println("===================");
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
