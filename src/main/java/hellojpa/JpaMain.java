@@ -83,12 +83,18 @@ public class JpaMain {
 //            System.out.println("===================");
 //            tx.commit();
             //--------------준영속----------준영속이 되어 셀렉트만되고 업데이트쿼리는 안나감
-            Member member = em.find(Member.class, 1L);
-            member.setName("test");
-//            em.detach(member); //하나만 없앰
-            em.clear();//모두 없앰
-            Member member2 = em.find(Member.class, 1L);//영속성 캔택스트에서 제거했기때문에 여기서도 select문이 나감
-            System.out.println("===================");
+//            Member member = em.find(Member.class, 1L);
+//            member.setName("test");
+////            em.detach(member); //하나만 없앰
+//            em.clear();//모두 없앰
+//            Member member2 = em.find(Member.class, 1L);//영속성 캔택스트에서 제거했기때문에 여기서도 select문이 나감
+//            System.out.println("===================");
+            //------------필드와 컬럼 매핑---------------
+            Member member = new Member();
+            member.setId(3L);
+            member.setUsername("C");
+            member.setRoleType(RoleType.GUEST);
+            em.persist(member);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
