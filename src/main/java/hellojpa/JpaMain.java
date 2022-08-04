@@ -90,11 +90,35 @@ public class JpaMain {
 //            Member member2 = em.find(Member.class, 1L);//영속성 캔택스트에서 제거했기때문에 여기서도 select문이 나감
 //            System.out.println("===================");
             //------------필드와 컬럼 매핑---------------
-            Member member = new Member();
-            member.setId(3L);
-            member.setUsername("C");
-            member.setRoleType(RoleType.GUEST);
-            em.persist(member);
+
+
+            Member member1 = new Member();
+            member1.setUsername("hello");
+              em.persist(member1);
+            Member member2 = new Member();
+            member2.setUsername("hello");
+            em.persist(member2);
+
+            Member member3 = new Member();
+            member3.setUsername("hello");
+            em.persist(member3);
+
+            Member member4 = new Member();
+            member4.setUsername("hello");
+            em.persist(member4);
+
+            Member member5 = new Member();
+            member5.setUsername("hello");
+            em.persist(member5);
+
+            Member member6 = new Member();
+            member6.setUsername("hello");
+            em.persist(member6);
+
+            Member member7 = new Member();
+            member7.setUsername("hello");
+            em.persist(member7);
+
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
